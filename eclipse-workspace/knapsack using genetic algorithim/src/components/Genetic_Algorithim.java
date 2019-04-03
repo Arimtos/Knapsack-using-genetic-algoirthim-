@@ -1,15 +1,19 @@
 package components;
 
 public class Genetic_Algorithim {
-
+    private Generation[] Generations;
+    private int generation=0;
 	private Gene[] items; // Produced items for the knapsack solution
 	private int size; // number of produced items
 	private Chromosome[] population; // population of produced solutions for knapsack
 	private int populationSize;// number of solutions for knapsack solutions 
 	private int maxWeight; // max weight all chromosomes should have
 	private int solutionSize;// number of items in each solution
+	private int iteration;// stores the number of iterations we are performing in our GA 
+	
 
-	public Genetic_Algorithim(int size, int populationSize, int maxWeight,int solutionSize) {
+	public Genetic_Algorithim(int size, int populationSize, int maxWeight,int solutionSize,int iteration) {
+		this.iteration=iteration;
 		this.solutionSize=solutionSize;
 		this.size = size; 
 		this.items=new Gene[size];
@@ -18,7 +22,6 @@ public class Genetic_Algorithim {
 		this.maxWeight=maxWeight;
 		makeRandom();
 		makePopulation();
-		fitness();
 		System.out.print(population[0].getTotalValue());
 	}
 	//generates items with random weights and values
@@ -61,37 +64,7 @@ public class Genetic_Algorithim {
 			temp.Print();
 
 		}
+		Generations[0]=new Generation(population,maxWeight,populationSize);
+		
 	}
-	public void fitness() {// tests if the produced solutions satisfy the basic knapsack conditions, as well as tests how good they are
-		for(int i=0;i<populationSize;i++) {
-			if(population[i].getTotalWeight()>maxWeight) {
-				population[i].setValid(false);
-			}
-			else
-				population[i].setValid(true);
-		}
-		sort(population);
-	}
-	void sort(Chromosome[] generation) 
-	{ 
-		 int n = generation.length; 
-		  
-	        // One by one move boundary of unsorted subarray 
-	        for (int i = 0; i < n-1; i++) 
-	        { 
-	            // Find the minimum element in unsorted array 
-	            int min_idx = i; 
-	            for (int j = i+1; j < n; j++) 
-	                if (generation[j].getTotalValue() < generation[min_idx].getTotalValue()) 
-	                    min_idx = j; 
-	  
-	            // Swap the found minimum element with the first 
-	            // element 
-	            Chromosome temp = generation[min_idx]; 
-	            generation[min_idx] = generation[i]; 
-	            generation[i] = temp; 
-	        }
-	} 
-
-
 }
