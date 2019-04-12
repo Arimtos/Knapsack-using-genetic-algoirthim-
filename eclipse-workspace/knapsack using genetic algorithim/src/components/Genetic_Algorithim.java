@@ -1,8 +1,8 @@
 package components;
 
 public class Genetic_Algorithim {
-    private Generation[] Generations;
-    private int generation=0;
+	private Generation[] Generations;
+	private int generation=0;
 	private Gene[] items; // Produced items for the knapsack solution
 	private int size; // number of produced items
 	private Chromosome[] population; // population of produced solutions for knapsack
@@ -10,7 +10,7 @@ public class Genetic_Algorithim {
 	private int maxWeight; // max weight all chromosomes should have
 	private int solutionSize;// number of items in each solution
 	private int iteration;// stores the number of iterations we are performing in our GA 
-	
+
 
 	public Genetic_Algorithim(int size, int populationSize, int maxWeight,int solutionSize,int iteration) {
 		this.iteration=iteration;
@@ -20,9 +20,9 @@ public class Genetic_Algorithim {
 		this.population=new Chromosome[populationSize];
 		this.populationSize=populationSize;
 		this.maxWeight=maxWeight;
+		Generations=new Generation[iteration];
 		makeRandom();
 		makePopulation();
-		System.out.print(population[0].getTotalValue());
 	}
 	//generates items with random weights and values
 	public void makeRandom() {
@@ -37,6 +37,7 @@ public class Genetic_Algorithim {
 			// stores the item in the array
 		}
 	}
+
 	public void makePopulation(){ // Generates intital random population of solutions 
 		int max = size; // 
 		int min = 0; // 
@@ -60,11 +61,13 @@ public class Genetic_Algorithim {
 				temp.add(TempItem,randomItem);// adds the item with the random index and stores that index
 			}
 			population[i]=temp;
-			System.out.println("Soltuion"+i);
-			temp.Print();
 
 		}
-		Generations[0]=new Generation(population,maxWeight,populationSize);
-		
+		Generations[0]=new Generation(population,maxWeight,populationSize,solutionSize,size,items);
+	}
+	public void crossOver() {
+		Generations[0].fitness();
+		Generations[0].makeNewGeneration();
+	    
 	}
 }

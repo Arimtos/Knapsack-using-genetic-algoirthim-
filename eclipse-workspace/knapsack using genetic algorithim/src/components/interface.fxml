@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="718.0" prefWidth="703.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <ListView layoutX="48.0" layoutY="46.0" prefHeight="409.0" prefWidth="237.0" />
+      <Button layoutX="544.0" layoutY="430.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Run" />
+      <TextField fx:id="Iterations" layoutX="470.0" layoutY="164.0" />
+      <TextField fx:id="weight" layoutX="470.0" layoutY="301.0" />
+      <Text layoutX="484.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of iteratons" />
+      <Text layoutX="490.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Solution Max weight" />
+   </children>
+</AnchorPane>

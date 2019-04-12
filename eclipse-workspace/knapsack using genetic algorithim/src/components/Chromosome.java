@@ -8,11 +8,12 @@ public class Chromosome {
 	private int maxWeight; // max weight allowed for the solution
 	private int totalWeight; // current total weight in the solution
 	private int totalValue;  // current total value in the solution
-	private int totalIems;// number of items in the GA system;
+	private int numberOfItems;// number of items in the GA system;
 	private boolean valid;// Tests if the solution is valid or not
+	private int parents[];
 
 	public Chromosome(int size,int maxWeight, int totalNumber) {
-		this.totalIems=totalNumber;// 
+		this.numberOfItems=totalNumber;// 
 		current=0; // currently no items in the solution
 		this.size=size; // number of items in the solution
 		this.totalValue=0;
@@ -20,9 +21,27 @@ public class Chromosome {
 		this.maxWeight=maxWeight; // max weight of the solution 
 		items=new Gene[size]; //making an empty list of solutions 
 		binary=new StringBuilder("");
-		for(int i=0;i<totalIems;i++) {       /*saying that there are no items included so far 
+		for(int i=0;i<numberOfItems;i++) {       /*saying that there are no items included so far 
 		 */ 			binary.append('0');
+		 
 		}
+		parents=new int[2];
+	}
+
+	public int getNumberOfItems() {
+		return numberOfItems;
+	}
+
+	public void setNumberOfItems(int numberOfItems) {
+		this.numberOfItems = numberOfItems;
+	}
+
+	public int[] getParents() {
+		return parents;
+	}
+
+	public void setParents(int[] parents) {
+		this.parents = parents;
 	}
 
 	public boolean isValid() {
@@ -32,14 +51,21 @@ public class Chromosome {
 	public void setValid(boolean valid) {
 		this.valid = valid;
 	}
+	public boolean getValid() {
+		return this.valid;
+	}
+
 
 	public void Print() {
 		for(int i=0;i<size;i++) {
-			System.out.println("Value:"+items[i].getValue()+"   Weight:"+items[i].getWeight()+"    Index:"+items[i].getIndex());
+			if(items[i]!=null)
+				System.out.println("Value:"+items[i].getValue()+"   Weight:"+items[i].getWeight()+"    Index:"+items[i].getIndex());
 		}
 		System.out.println(binary.toString());
 		System.out.println("Total weight:"+" "+ totalWeight);
 		System.out.println("Total value:"+" "+totalValue);
+		System.out.println("valid="+valid);
+
 		System.out.println("==========================================");
 	}
 	public void add(Gene item, int index) { //adds an item to the solution
@@ -122,11 +148,11 @@ public class Chromosome {
 		this.totalValue = totalValue;
 	}
 
-	public int getTotalIems() {
-		return totalIems;
+	public int getnumberOfItems() {
+		return numberOfItems;
 	}
 
-	public void setTotalIems(int totalIems) {
-		this.totalIems = totalIems;
+	public void setnumberOfItems(int numberOfItems) {
+		this.numberOfItems = numberOfItems;
 	}
 }
