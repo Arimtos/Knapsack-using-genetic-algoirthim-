@@ -25,10 +25,6 @@ public class Generation {
 		
 	}
 
-
-
-
-
 	public void fitness() {// tests if the produced solutions satisfy the basic knapsack conditions, as well as tests how good they are
 		for(int i=0;i<generationSize;i++) {// for each item in the generation check KP conditions
 			if(Generation[i].getTotalWeight()>maxWeight) {
@@ -70,7 +66,7 @@ public class Generation {
 		return generateSolution(Binary);
 
 	}
-	public void makeNewGeneration() {
+	public Generation makeNewGeneration() {
 		int max = items.length; // 
 		int min = 0; // 
 		int range = max - min; //range of items indexes
@@ -79,19 +75,24 @@ public class Generation {
 			int randomItem=(int)(Math.random() * range);// generates random index for the item
 			if(Generation[fittestIndex].getValid()==true && fittestIndex-1>=0&&Generation[fittestIndex-1].getValid()==true)
 			{
-				newGeneration[i]=crossOver(randomItem);
-				newGeneration[i].setParents(parents);
+				
+				Chromosome temp=crossOver(randomItem);
+				temp.setParents(parents);
+				newGeneration[i]=temp;
 				i++;
 			}
 			else {
+				
 				fittestIndex=fittest;
-				newGeneration[i]=crossOver(randomItem);
-				newGeneration[i].setParents(parents);
+				Chromosome temp=crossOver(randomItem);
+				temp.setParents(parents);
+				newGeneration[i]=temp;
 				i++;
 			}             
 		}
 		nextGeneration=new Generation(newGeneration, maxWeight,  generationSize, solutionSize, numberOfItems,items );
         printNew();
+        return nextGeneration;
 	}
 
 
